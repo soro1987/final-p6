@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<th:block th:insert="fragments/head::head"></th:block>
+</head>
+<th:block th:insert="fragments/navbar::navbar"></th:block>
+<style>
+.st {
+	font-style: italic;
+	font-weight: bold;
+}
+
+.bl {
+	font-weight: bold;
+	color: #0A654B;
+}
+
+.tw {
+	color: white;
+}
+html {
+	background-size: 100%;
+	background-repeat: no-repeat;
+	height: 100%;
+}
+
+body {
+	   background-color: #9AECDB;
+	
+}
+.border-button {
+	border-width: 4px;
+	border-color: white;
+}
+
+</style>
+<body id="bg">
+	<div class="container mt-5">
+		<div class="row">
+			<div class="card col-8 offset-2">
+				<div class="card-body">
+					<h5 class="card-title">
+						<span class="text-secondary h4">Nom du topo : </span><span
+							class="h4" th:text="${topo.topoName}"></span><span class="h4">
+							| Poster par : </span> <i class="fa fa-user fa-lg"></i> <span
+							th:text="${topo.userId.username}"></span>
+					</h5>
+					<p class="card-text">
+						<span class="h4 text-secondary">Description : </span><span
+							class="h4" th:text="${topo.description}"></span>
+					</p>
+					<p class="card-text">
+						<span class="h4 text-secondary">Localisation : </span><span
+							class="h4" th:text="${topo.topoLocation}"></span>
+					</p>
+					<p class="card-text">
+						<span class="h4 text-secondary">Email : </span><span class="h4"
+							th:text="${topo.userId.mail}"></span>
+					</p>
+					<a th:if='${session.userSession != null}'
+					th:href="@{/postCommentaireTopo/{id}(id=${topo.id})}"
+					class="btn btn-info border-button">Commenter</a> <a
+					th:if='${session.userSession == null}' class="btn btn-info border-button"
+					data-toggle="modal" data-target="#soro"> Commenter </a> 
+					<th:block th:if='${session.userSession != null }'>
+						<a class="btn btn-secondary border-button" th:if='${session.userSession.id != topo.userId.id }'
+						 th:href="@{/placeReservation/{id}(id=${topo.id})}"> Reservation
+						</a>
+					</th:block>
+					<p class="card-text">
+						<small class="text-muted"><span
+							th:text="${topo.dateParution}"></span></small>
+					</p>
+				</div>
+				<img th:if="${topo.imageUrl != null}" th:src="@{/image/{image}(image=${topo.imageUrl})}"
+					class="card-img-bottom" >
+			</div>
+			<div class="card-body">
+				
+			</div>
+			<div class="col-12">
+			<ul class="list-group mt-5">
+				<li style="word-break: break-all;" class="list-group-item mt-2"
+					th:if="${comment.message != null}"
+					th:each="comment: ${topo.commentaires}">
+					<div class="container-fluid">
+						<div class="row" th:if="${comment.userId != null}">
+							<div class=" col-2">
+								<span class="bl" th:text="${comment.userId.username}"></span><br>
+								<span class="st"
+									th:text="${#dates.format(comment.date,'dd/MM/yyyy' )}"></span><br>
+								<span class="st"
+									th:text="${#dates.format(comment.date,'HH:mm' )}"></span>
+							</div>
+							<span class="col-8 mr-0" th:text="${comment.message}"> </span>
+							<div class="col-2 text-right"
+								th:if="${session.userSession != null &&  comment.userId.id == session.userSession.id}">
+								<a class="btn btn-success btn-sm"
+									th:href="@{/editCommentTopo(id=${comment.id}, idTopo=${topo.id})}"><i
+									class="fa fa-edit tw"></i></a> <a class="btn btn-danger btn-sm"
+									th:href="@{/deleteCommentTopo/{id}(id=${comment.id})}"><i
+									class="fa fa-trash tw"></i></a>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+			</div>
+		</div>
+	</div>
+	<!-- The Modal -->
+	<div class="modal" id="soro">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">Modal Heading</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<!-- Modal body -->
+				<div class="modal-body">
+					<div class="alert alert-danger" role="alert">
+						<a th:href="@{/register}">Veuillez vous connectez afin de
+							commentez</a>
+					</div>
+				</div>
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<th:block th:insert="fragments/footer::footer"></th:block>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

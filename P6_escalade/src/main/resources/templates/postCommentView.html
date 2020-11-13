@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<th:block th:insert="fragments/head::head"></th:block>
+<meta charset="UTF-8" />
+<style>
+html {
+	background-size: 100%;
+	background-repeat: no-repeat;
+	height: 100%;
+}
+
+body {
+	background: linear-gradient(rgba(33, 33, 37, 0.6), rgba(33, 33, 37, 0.6))
+		100%, url('../images/place-reservation.jpg');
+	height: 100%;
+}
+</style>
+</head>
+<body id="bg">
+	<th:block th:insert="fragments/navbar::navbar"></th:block>
+	<div class="container mt-5">
+		<div class="row">
+			<!-- Ajout d'un site -->
+			<!-- th:object pertmet de recuperer l'object par @ModelAttribute -->
+			<form th:if="${site != null}" class="container"
+				th:action="@{/postCommentaire/{id}(id=${site.id})}"
+				th:object="${commentModel}" method="POST">
+				<div class="form-group row">
+					<label class="col-12  text-light h5 border-text"> Votre
+						commentaire </label>
+					<!-- th:field permet de mettre à jour un champs de l'objet -->
+					<textarea class="form-control col-12 col-sm-9"
+						th:field="*{message}" /></textarea>
+					<div class="text-danger" th:if="${#fields.hasErrors('message')}"
+						th:errors="*{message}"></div>
+				</div>
+				<div class="form-group row">
+					<input type="submit" value="Ajouter"
+						class="col-12 col-md-2  btn btn-secondary btn-lg border-button  text-light">
+				</div>
+			</form>
+
+			<!-- Ajout d'un  -->
+			<!-- th:object pertmet de recuperer l'object par @ModelAttribute -->
+			<form th:if="${topo != null}" class="container"
+				th:action="@{/postCommentaireTopo/{id}(id=${topo.id})}"
+				th:object="${commentModel}" method="POST">
+				<div class="form-group row">
+					<label class="col-12  text-light h5 border-text"> Votre
+						commentaire </label>
+					<!-- th:field permet de mettre à jour un champs de l'objet -->
+					<textarea class="form-control col-12" th:field="*{message}" /></textarea>
+					<div class="text-danger" th:if="${#fields.hasErrors('message')}"
+						th:errors="*{message}"></div>
+				</div>
+				<div class="form-group row">
+					<input type="submit" value="Ajouter"
+						class="col-12 col-md-2  btn btn-secondary btn-lg border-button  text-light">
+				</div>
+			</form>
+		</div>
+	</div>
+	<th:block th:insert="fragments/footer::footer"></th:block>
+</body>
+</html>

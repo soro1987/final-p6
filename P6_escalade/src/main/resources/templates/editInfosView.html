@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<th:block th:insert="fragments/head::head"></th:block>
+<meta charset="UTF-8" />
+</head>
+
+
+
+<body>
+	<th:block th:insert="fragments/navbar::navbar"></th:block>
+	<div class="container mt-5">
+		<div class="row">
+			<form class="container" th:action="@{/editInfos}"
+				th:object="${userInfos}" method="POST">
+				<div class="col-12">
+					<div class="card border-secondary mb-3 text-center">
+						<div class="card-header card-secondary h1">
+							<label>Inserer nouvelles infos</label>
+						</div>
+						<div class="card-text p-3">
+							<p>
+							<div>
+								<label class="h4 text-secondary label-perso">Username :
+								</label> <input type=text placeholder="Username" class="h4 "
+									th:field="*{username}" />
+								<div class="text-danger" th:errors="*{username}"></div>
+							</div>
+							<div>
+								<label class="h4 text-secondary label-perso">Nom : </label> <input
+									type="text" placeholder="lastname" class="h4 "
+									th:field="*{lastname}" />
+							</div>
+							<div>
+								<label class="h4 text-secondary label-perso">Prenom : </label> <input
+									class="h4" placeholder="Firstname" th:field="*{firstname}"
+									type="text" />
+							</div>
+							<div>
+								<label class="h4 text-secondary label-perso">Telephone :
+								</label> <input class="h4" placeholder="Telephone"
+									th:field="*{telephone}" type="text" />
+							</div>
+							<div>
+								<label class="h4 text-secondary label-perso">Email : </label> <input
+									class="h4" placeholder="Email" th:field="*{mail}" type="text" />
+							</div>
+							<div>
+								<label class="h4 text-secondary label-perso">Password :
+								</label> <input class="h4" placeholder="Password" th:field="*{password}"
+									type="password">
+							</div>
+							<input type="submit" value="Valider"
+								class="offset-10 col-2 btn btn-secondary btn-lg">
+			</form>
+			</p>
+		</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	<th:block th:insert="fragments/footer::footer"></th:block>
+</body>
+
+</html>
