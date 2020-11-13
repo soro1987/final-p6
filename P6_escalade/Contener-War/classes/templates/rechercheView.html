@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8" />
+		<title>La liste des site</title>
+		<th:block th:insert="fragments/head::head"></th:block>	
+		<style type="text/css">
+			.largeur {
+				width: 4%;
+				margin-left: 3px;
+				text-decoration: none;
+				color: black;
+			}
+			.centre {
+				margin: 2% auto;
+			}
+			
+			.l-space {
+				padding-left: 3px;
+			}
+			html {
+	background-size: 100%;
+	background-repeat: no-repeat;
+	height: 100%;
+}
+
+body {
+	background: linear-gradient(rgba(33, 33, 37, 0.6), rgba(33, 33, 37, 0.6)) 100%,
+		url('../images/place-reservation.jpg'); 
+	height: 100%;
+	
+}
+		</style>	
+	</head>
+	<body>
+	<br><br><br><br><br><br>
+		<th:block th:insert="fragments/navbar::navbar"></th:block>
+		<div class="container-fluid">
+			<!--div class="row inp-1">
+					<div class="centre">
+						<label >Critère de recherche: </label>&nbsp;&nbsp;&nbsp;&nbsp;
+						<a class="largeur" th:href="@{/selectionNom(nomCritere=${session.nomCritere})}"><input type="checkbox" th:value="${session.nomCritere}" th:checked="${session.nomCritere}"/><label class="l-space" for="nom">Nom</label></a>
+						<a class="largeur" th:href="@{/selectionLieu(lieuCritere=${session.lieuCritere})}"><input type="checkbox" th:value="${session.lieuCritere}" th:checked="${session.lieuCritere}"/><label class="l-space" for="nom">Lieu</label></a>
+						<a class="largeur" th:href="@{/selectionnbrSecteur(nbrSecteurCriteurs=${session.nbrSecteurCriteurs})}"> <input type="checkbox"  th:value="${session.nbrSecteurCriteurs}" th:checked="${session.nbrSecteurCriteurs}"/> <label class="l-space" for="nbs">Nombre de secteurs</label></a>
+					</div>
+			  </div>-->
+			<div class="row">
+				<form class="form-inline form-group  mx-auto mt-1" th:action="@{/search}" method="get" >
+					<input  type="text" class="col-3" placeholder="Nom du site" name="nomSite"/>
+					<input  type="text" class="col-3" placeholder="Lieu du site" name="lieu" />
+					<input  type="text" class="col-3" placeholder="nombre de secteur" name="nbrSecteurs" />
+					<button type="submit" class="btn btn-secondary ml-2 fa fa-search"></button>
+				</form>
+			</div>
+		</div >
+		
+		 <th:block th:if="${sites.size() != 0}">
+		<div class="album py-5 bg-light" >
+		    <div class="container">
+				
+		      <div class="row">
+
+				
+		     
+				<th:block th:each="site : ${sites}">
+					<a th:href="@{/displaySite/{id}(id=${site.id})}">
+					<div class="col-md-4">
+					  <div class="card mb-4 shadow-sm">
+					  <img th:if="${site.imageUrl != null}" class="bd-placeholder-img card-img-top radius0" style="border-radius :0px " width="100%" height="225"  alt="hhh" th:src="@{/image/{image}(image=${site.imageUrl})}" />
+					  
+						<svg th:if="${site.imageUrl == null}" class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em" th:text="${site.nomSite}"></text></svg>
+						<div class="card-body">
+						  <p class="card-text" th:text="${site.descriptionSite}"></p>
+						  <div class="d-flex justify-content-between align-items-center">
+							<div class="btn-group">
+							  <a type="button" class="btn btn-sm btn-outline-secondary" th:href="@{/displaySite/{id}(id=${site.id})}">Voir</a>
+							  <th:block th:if="${session.userSession != null && session.userSession.admin }">
+								 <a th:if="${site.estTaguer == false}" type="button" class="btn btn-sm btn-outline-secondary" th:href="@{/taguer/{id}(id=${site.id})}">Tag</a>              
+								 <a th:if="${site.estTaguer}" type="button" class="btn btn-sm btn-outline-secondary" th:href="@{/DeTaguer/{id}(id=${site.id})}">Detag</a>
+							  </th:block>
+							  <th:block th:if="${(session.userSession != null && session.userSession.admin==false) || (session.userSession == null) }">
+								<div th:if="${site.estTaguer}">
+								  <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-award " fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9.669.864L8 0 6.331.864l-1.858.282-.842 1.68-1.337 1.32L2.6 6l-.306 1.854 1.337 1.32.842 1.68 1.858.282L8 12l1.669-.864 1.858-.282.842-1.68 1.337-1.32L13.4 6l.306-1.854-1.337-1.32-.842-1.68L9.669.864zm1.196 1.193l-1.51-.229L8 1.126l-1.355.702-1.51.229-.684 1.365-1.086 1.072L3.614 6l-.25 1.506 1.087 1.072.684 1.365 1.51.229L8 10.874l1.356-.702 1.509-.229.684-1.365 1.086-1.072L12.387 6l.248-1.506-1.086-1.072-.684-1.365z" /><path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z" />
+								  </svg>
+								</div>
+							 </th:block>
+							</div>
+							<small class="text-muted">9 mins</small>
+						  </div>
+						</div>
+					  </div>
+					</div>
+					</a>
+					</th:block>
+					
+		      </div>
+		      
+		    </div>
+		  </div>
+		</th:block>
+		<th:block th:insert="fragments/footer::footer"></th:block>	
+	</body>
+</html>

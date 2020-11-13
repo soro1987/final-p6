@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<th:block th:insert="fragments/head::head"></th:block>
+<meta charset="UTF-8" />
+<style>
+html {
+	background-size: 100%;
+	background-repeat: no-repeat;
+	height: 100%;
+}
+
+body {
+	background: linear-gradient(rgba(33, 33, 37, 0.6), rgba(33, 33, 37, 0.6)) 100%,
+		url('../images/place-reservation.jpg'); 
+	height: 100%;
+	
+}
+
+</style>
+</head>
+<body id="bg">
+	<th:block th:insert="fragments/navbar::navbar"></th:block>
+
+	<div class="container mt-5">
+		<div class="row">
+
+			<form class="container" th:action="@{/postTopo}"
+				th:object="${topoModel}" method="POST" enctype="multipart/form-data">
+
+				<fieldset class="row">
+					<legend class="text-center text-light border-text h4">Ajouter
+						un Topo</legend>
+				</fieldset>
+				<span class="mb-3"></span>
+				<div class="form-group row">
+					<label class="col-12 col-sm-3 text-light border-text h5">Nom
+						 </label> <input type="text" class="form-control col-12 col-sm-9"
+						th:field="*{topoName}" />
+					<div class="text-danger" th:if="${#fields.hasErrors('topoName')}"
+						th:errors="*{topoName}"></div>
+				</div>
+				<div class="form-group row">
+					<label class="col-12 col-sm-3 text-light  border-text h5">Description
+					</label> <input type="text" class="form-control col-12 col-sm-9"
+						th:field="*{description}" />
+					<div class="text-danger"
+						th:if="${#fields.hasErrors('description')}"
+						th:errors="*{description}"></div>
+				</div>
+
+				<div class="form-group row">
+					<label class="col-12 col-sm-3 text-light border-text h5">Adresse
+						 </label> <input type="text" class="form-control col-12 col-sm-9"
+						th:field="*{topoLocation}" />
+					<div class="text-danger"
+						th:if="${#fields.hasErrors('topoLocation')}"
+						th:errors="*{topoLocation}"></div>
+				</div>
+				<div class="form-group row">
+					<label class="col-12 col-sm-3 text-light h5 border-text">Photo
+						 </label> <input type="file" name="url"
+						class="border-button border-text1 text-light col-12 col-sm-9" th:field="*{url}" />
+					<div class=" text-danger" th:errors="*{url}"></div>
+				</div>
+
+
+				<div class="row">
+					<input type="submit" value="Ajouter"
+					class="col-12  col-md-2  btn btn-secondary btn-lg border-button  text-light">
+				</div>
+
+
+			</form>
+		</div>
+	</div>
+	<th:block th:insert="fragments/footer::footer"></th:block>
+</body>
+</html>

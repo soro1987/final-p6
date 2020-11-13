@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<th:block th:insert="fragments/head::head"></th:block>
+<meta charset="UTF-8" />
+
+</head>
+
+
+<style>
+html {
+	background-size: 100%;
+	background-repeat: no-repeat;
+	height: 100%;
+}
+
+body {
+	background: linear-gradient(rgba(33, 33, 37, 0.6), rgba(33, 33, 37, 0.6)) 100%,
+		url('../images/place-reservation.jpg'); 
+	height: 100%;
+	
+}
+
+.border-button {
+	border-width: 4px;
+	border-color: white;
+	border-radius: 2px;
+}
+</style>
+<body id="bg">
+	<th:block th:insert="fragments/navbar::navbar"></th:block>
+
+	<div class="container mt-5">
+		<div class="row">
+			<form class="container"
+				th:action="@{/postSecteur/{id}(id=${site.id})}"
+				th:object="${secteurModel}" method="POST">
+
+				<fieldset class="row">
+					<legend class="text-center text-light h4 border-text">Ajouter
+						un secteur</legend>
+				</fieldset>
+				<span class="mb-3"></span>
+				<div class="form-group row">
+					<label class="col-12  text-light h5 border-text">Nom du
+						secteur </label> <input type="text" class="form-control col-12 "
+						th:field="*{nom}" />
+					<div class="offset-3 text-danger" th:errors="*{nom}"></div>
+				</div>
+				<div class="form-group row">
+					<label class="col-12 text-light h5 border-text"> Location
+						du Secteur </label> <input type="text" class="form-control  col-12 "
+						min="0" max="50" th:field="*{location}" />
+					<div class="text-danger" th:errors="*{location}"></div>
+				</div>
+				<div class="form-group row">
+					<label class="col-12  text-light h5 border-text">
+						Description </label>
+					<textarea class="form-control col-12 " th:field="*{description}" /></textarea>
+					<div class="offset-3 text-danger" th:errors="*{description}"></div>
+				</div>
+				<div class="row">
+					<input type="submit" value="Ajouter"
+						class="col-12  col-md-2  btn btn-secondary btn-lg border-button  text-light">
+				</div>
+			</form>
+		</div>
+	</div>
+	<th:block th:insert="fragments/footer::footer"></th:block>
+</body>
+</html>

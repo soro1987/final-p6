@@ -1,0 +1,70 @@
+
+<head>
+<th:block th:insert="fragments/head::head"></th:block>
+<meta charset="UTF-8" />
+<style>
+html {
+	background-size: 100%;
+	background-repeat: no-repeat;
+	height: 100%;
+}
+
+body {
+	background-color: #6a89cc;
+	
+}
+
+.border-button {
+	border-width: 4px;
+	border-color: white;
+}
+</style>
+</head>
+
+<body id="bg">
+	<th:block th:insert="fragments/navbar::navbar"></th:block>
+	<br><br><br>
+	<div class="container mt-5 text-center">
+		<div class="row text-center">
+			<div class="col-12 ">
+				<div class="">
+					<div class="">
+						<i class="fa fa-user fa-lg"></i> <span
+							class="col-12 h4 text-light border-text" th:text="${secteur.nom}"></span>
+					</div>
+					<div class="text-center">
+						<p>
+						<div>
+							<span class="text-light border-text2 ">Description : </span><span
+								class="text-secondary text-rep2"
+								th:text="${secteur.description}"></span>
+						</div>
+						<div>
+							<span class="text-light border-text2">Localisation : </span><span
+								class="text-secondary text-rep2" th:text="${secteur.location}"></span>
+						</div>
+						<div>
+							<span class="text-light border-text2">Voies : </span><span
+								class="text-secondary text-rep2"
+								th:text="${secteur.voies.size()}"></span><br><br>
+						</div>
+						<th:block th:each="voie: ${secteur.voies}">
+							<span><a class="btn btn-info border-button "
+								th:href="@{/displayVoie/{id}(id=${voie.id})}"
+								th:text="${voie.nomVoie}"></a></span>
+
+						</th:block>
+						</p>
+					</div>
+				</div>
+				<a th:if='${session.userSession != null}' type="button"
+					th:href="@{/postVoie/{id}(id=${secteur.id})}"
+					class="btn btn-secondary border-button">Ajouter Voie</a>
+			</div>
+
+		</div>
+	</div>
+	<th:block th:insert="fragments/footer::footer"></th:block>
+</body>
+
+</html>
