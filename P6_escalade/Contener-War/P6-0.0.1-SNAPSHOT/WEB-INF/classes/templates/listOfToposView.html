@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author"
+	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+<meta name="generator" content="Jekyll v4.1.1">
+<th:block th:insert="fragments/head::head"></th:block>
+
+<title>Liste des topos</title>
+
+<link rel="canonical"
+	href="https://getbootstrap.com/docs/4.5/examples/album/">
+<style>
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
+
+html {
+	background-size: 100%;
+	background-repeat: no-repeat;
+	height: 100%;
+}
+
+</style>
+<!-- Custom styles for this template -->
+<link href="css/album.css" rel="stylesheet">
+</head>
+<body>
+	<div class="mt-0">
+		<th:block th:insert="fragments/navbar::navbar"></th:block>
+	</div>
+	<br><br>
+	<div th:if="${activeAlert}" class="container mt-3">
+		<div class="row">
+			<div class="alert alert-warning col-11 text-center" role="alert">
+				<a th:href="@{/register}">Veuillez vous connectez afin
+					d'effectuer un ajouter</a>
+			</div>
+		</div>
+	</div>
+
+
+	<main role="main">
+		<section class="jumbotron text-center"
+			style="background-image: url('images/post-topo.jpg') no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+			<div class="container">
+				<h1>Topos</h1>
+				<p class="lead text-muted">Découvrez les plus beaux tops poster par nos adhérents. Placer une réservation pour pouvoir les échanger</p>
+				<p>
+				<div th:if="${session.userSession != null}">
+					<a th:href="@{/postTopo}" class="btn btn-secondary btn-lg">Ajouter
+						Topo</a>
+				</div>
+				<div th:if="${session.userSession == null}">
+					<a th:href="@{/alert}" class="btn btn-secondary btn-lg">Ajouter
+						Topo</a>
+				</div>
+				</p>
+
+			</div>
+		</section>
+		<div class="album py-5 bg-light">
+			<div class="container">
+
+				<div class="row">
+
+					<th:block th:each="topo : ${listTopos}">
+						<th:block th:if="${topo.equals() == false}">
+
+							<a th:href="@{/displayTopos/{id}(id=${topo.id})}">
+								<div class="col-md-4">
+									<div th:if= "${topo.reserver !=true}" class="card mb-4 shadow-sm">
+										<img th:if="${topo.imageUrl != null}"
+											class="bd-placeholder-img card-img-top radius0"
+											style="border-radius: 0px" width="100%" height="225"
+											alt="hhh" th:src="@{/image/{image}(image=${topo.imageUrl})}" />
+
+										<svg th:if="${topo.imageUrl == null}"
+											class="bd-placeholder-img card-img-top" width="100%"
+											height="225" xmlns="http://www.w3.org/2000/svg"
+											preserveAspectRatio="xMidYMid slice" focusable="false"
+											role="img" aria-label="Placeholder: Thumbnail">
+										<title>Placeholder</title><rect width="100%" height="100%"
+												fill="#55595c" />
+										<text x="50%" y="50%" fill="#eceeef" dy=".3em"
+												th:text="${topo.topoName}"></text></svg>
+										<div class="card-body">
+											<p class="card-text" th:text="${topo.description}"></p>
+											<div
+												class="d-flex justify-content-between align-items-center">
+												<div class="btn-group">
+													<a type="button" class="btn btn-sm btn-outline-secondary"
+														th:href="@{/displayTopos/{id}(id=${topo.id})}">Voir</a>
+												</div>
+												<small class="text-muted">9 mins</small>
+											</div>
+										</div>
+									</div>
+								</div>
+							</a>
+						</th:block>
+				</div>
+			</div>
+		</div>
+
+	</main>
+
+	<footer class="text-muted">
+		<div class="container">
+			<p class="float-right">
+				<a href="#">Back to top</a>
+			</p>
+			<p>&copy; 2019-2020 | Les amis de l'escalade, Inc. &middot;&middot;</p>
+		</div>
+	</footer>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script>
+		window.jQuery
+				|| document
+						.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')
+	</script>
+	<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+	<script th:src="@{/popper/popper.min.js}"></script>
+	<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+</html>
+

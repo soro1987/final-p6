@@ -1,0 +1,75 @@
+<!DOCTYPE html >
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+<th:block th:insert="fragments/head::head"></th:block>
+<meta charset="UTF-8"/> 
+</head>
+<th:block th:insert="fragments/navbar::navbar"></th:block>
+
+<style>
+.st {
+	font-style: italic;
+	font-weight: bold;
+}
+
+.bl {
+	font-weight: bold;
+	color: #0A654B;
+}
+
+.tw {
+	color: white;
+}
+
+#bg {
+	background-color:#fffa65
+}
+
+
+
+#card-color{
+
+   background-color: #9AECDB;
+}
+</style>
+
+
+<body id="bg">
+<br><br><br><br>
+	<div class="container mt-5">
+		<div class="row">
+			<div class="card col-12 text-center" id="card-color">
+				<h1 class="card-title text-light h6 border-text" th:text="'Reservation'"></h1>
+				<div class="card-text mb-3">
+					<span class="h5"
+						th:text="${#dates.format(reservation.messageDate, 'dd/MM/yyyy HH:mm' )}"></span><br>
+					<span  class=" text-light  " th:text="${reservation.user.username}"></span><span class="h5  "
+						th:text="' vous envoie une demande de reservation'"></span><br>
+					<span class="h5"
+						th:text="${'Message : '+ reservation.message}"></span><br>
+					<th:block th:if="${reservation.disponible == 'accepter'}">
+						<i class="fa fa-at fa-lg"></i>
+						<span  class="h5 text-secondary" th:text="${': ' + reservation.user.mail}"></span><br>
+						<i class="fa fa-phone fa-lg"></i>
+						<span  class="h5 text-secondary" th:text="${': ' + reservation.user.telephone}"></span><br>
+					</th:block>
+						<th:block th:if="${reservation.disponible != 'accepter'}">
+						<a class="btn btn-primary btn-lg " th:href="@{/accepter(idTopo=${reservation.topoId.id}, idReservation=${reservation.id})}"><i class="fa fa-check-circle fa-lg" style=" color: white"></i></a>
+						</th:block>
+						<th:block th:if="${reservation.disponible == 'accepter'}">
+						<a class="btn btn-info btn-lg " th:href="@{/disponible(idTopo=${reservation.topoId.id}, idReservation=${reservation.id})}"><i class="fa fa-share-square fa-lg"></i></a>
+						</th:block>
+						<th:block th:if="${reservation.disponible == 'refuser'}">
+						 <a class="btn btn-danger btn-lg" th:href="@{/supprimer(idTopo=${reservation.topoId.id}, idReservation=${reservation.id})}"><i class="fa fa-times-circle fa-lg" style="color:white"></i></a>
+                        </th:block>
+                        <th:block th:if="${reservation.disponible == 'demander'}">
+						 <a class="btn btn-danger btn-lg" th:href="@{/refuser(idTopo=${reservation.topoId.id}, idReservation=${reservation.id})}"><i class="fa fa-thumbs-down" style="color:white"></i></a>
+                        </th:block>
+				</div>
+			</div>
+		</div>
+	</div>
+	<th:block th:insert="fragments/footer::footer"></th:block>
+</body>
+
+</html>

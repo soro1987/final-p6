@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+  		<title>La liste des site</title>      
+        <th:block th:insert="fragments/head::head"></th:block>
+        <meta charset="UTF-8"/> 
+ <style>
+html {
+	background-size: 100%;
+	background-repeat: no-repeat;
+	height: 100%;
+}
+
+body {
+	background: linear-gradient(rgba(33, 33, 37, 0.6), rgba(33, 33, 37, 0.6)) 100%,
+		url('../images/place-reservation.jpg'); 
+	height: 100%;	
+}
+</style>
+    </head>
+	<body id="bg">			
+		<th:block th:insert="fragments/navbar::navbar"></th:block>   	
+		<div class="container mt-5">
+			<div class="row">
+				<th:block th:if="${session.userSession != null}">
+					<div class="col-12 col-sm-6 col-md-4" th:each="site : ${session.userSession.sites}">
+							
+						<div class="card border-primary mb-3">
+						  <div class="card-header"><a th:href="@{/displaySite/{id}(id=${site.id})}"><span class="text-secondary" th:text="${site.nomSite}"></span> </a> </div>
+						</div>							
+					</div>
+				</th:block>				
+			</div>
+		</div>
+		<th:block th:insert="fragments/footer::footer"></th:block>
+	</body>
+</html>

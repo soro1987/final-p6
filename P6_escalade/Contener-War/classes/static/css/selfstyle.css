@@ -1,0 +1,145 @@
+@font-face {
+	font-family: "neodigital";
+	src: url('/fonts/police/neodigital_free_font.ttf');
+}
+
+@font-face {
+	font-family: "Playball";
+	src: url('/fonts/police/Playball-Regular.ttf');
+}
+
+.border-text {
+	font-weight: bold;
+	font-size: 3em;
+	text-shadow: 0 0 4px #353b48, 0 0 4px #353b48, 0 0 4px #353b48, 0 0 4px
+		#353b48, 0 0 4px #353b48, 0 0 4px #353b48, 0 0 4px #353b48, 0 0 4px
+		#353b48, 0 0 4px #353b48, 0 0 4px #353b48, 0 0 4px #353b48, 0 0 4px
+		#353b48, 0 0 4px #353b48, 0 0 4px #353b48, 0 0 4px #353b48, 0 0 4px
+		#353b48, 0 0 4px #353b48, 0 0 4px #353b48, 0 0 4px #353b48, 0 0 4px
+		#353b48;
+}
+
+.border-text2 {
+	font-weight: bold;
+	font-size: 1.5em;
+	text-shadow: 0 0 4px #353b48, 0 0 4px #353b48, 0 0 4px #353b48, 0 0 4px
+		#353b48, 0 0 4px #353b48, 0 0 4px #353b48, 0 0 4px #353b48, 0 0 4px
+		#353b48, 0 0 4px #353b48, 0 0 4px #353b48, 0 0 4px #353b48, 0 0 4px
+		#353b48, 0 0 4px #353b48, 0 0 4px #353b48, 0 0 4px #353b48, 0 0 4px
+		#353b48, 0 0 4px #353b48, 0 0 4px #353b48, 0 0 4px #353b48, 0 0 4px
+		#353b48;
+}
+.border-text1 {
+	font-weight: bold;
+	font-size: 1em;
+	text-shadow: 0 0 4px #353b48, 0 0 4px #353b48, 0 0 4px #353b48, 0 0 4px
+		#353b48, 0 0 4px #353b48, 0 0 4px #353b48, 0 0 4px #353b48, 0 0 4px
+		#353b48, 0 0 4px #353b48, 0 0 4px #353b48, 0 0 4px #353b48, 0 0 4px
+		#353b48, 0 0 4px #353b48, 0 0 4px #353b48, 0 0 4px #353b48, 0 0 4px
+		#353b48, 0 0 4px #353b48, 0 0 4px #353b48, 0 0 4px #353b48, 0 0 4px
+		#353b48;
+}
+
+.text-rep1 {
+	font-weight: bold;
+	font-size: 1em;
+	text-shadow: 0 0 2px #ffffff, 0 0 2px #ffffff, 0 0 2px #ffffff, 0 0 2px
+		#ffffff, 0 0 2px #ffffff, 0 0 2px #ffffff, 0 0 2px #ffffff, 0 0 2px
+		#ffffff, 0 0 2px #ffffff, 0 0 2px #ffffff, 0 0 2px #ffffff, 0 0 2px
+		#ffffff, 0 0 2px #ffffff, 0 0 2px #ffffff, 0 0 2px #ffffff, 0 0 2px
+		#ffffff, 0 0 2px #ffffff, 0 0 2px #ffffff, 0 0 2px #ffffff, 0 0 2px
+		#ffffff;
+}
+.text-rep2 {
+	font-weight: bold;
+	font-size: 1.5em;
+	text-shadow: 0 0 2px #ffffff, 0 0 2px #ffffff, 0 0 2px #ffffff, 0 0 2px
+		#ffffff, 0 0 2px #ffffff, 0 0 2px #ffffff, 0 0 2px #ffffff, 0 0 2px
+		#ffffff, 0 0 2px #ffffff, 0 0 2px #ffffff, 0 0 2px #ffffff, 0 0 2px
+		#ffffff, 0 0 2px #ffffff, 0 0 2px #ffffff, 0 0 2px #ffffff, 0 0 2px
+		#ffffff, 0 0 2px #ffffff, 0 0 2px #ffffff, 0 0 2px #ffffff, 0 0 2px
+		#ffffff;
+}
+.text-rep3 {
+	font-weight: bold;
+	font-size: 2em;
+	text-shadow: 0 0 2px #ffffff, 0 0 2px #ffffff, 0 0 2px #ffffff, 0 0 2px
+		#ffffff, 0 0 2px #ffffff, 0 0 2px #ffffff, 0 0 2px #ffffff, 0 0 2px
+		#ffffff, 0 0 2px #ffffff, 0 0 2px #ffffff, 0 0 2px #ffffff, 0 0 2px
+		#ffffff, 0 0 2px #ffffff, 0 0 2px #ffffff, 0 0 2px #ffffff, 0 0 2px
+		#ffffff, 0 0 2px #ffffff, 0 0 2px #ffffff, 0 0 2px #ffffff, 0 0 2px
+		#ffffff;
+}
+
+
+	
+
+
+/* .maintxt1 { */
+/* 	background-image: url('images/post-topo.jpg'); */
+/* 	background-size: cover; */
+/* } */
+
+a:hover {
+	text-decoration: none;
+	border-radius: 8px;
+}
+
+radius0 {
+	border-radius: 0px;
+}
+
+.label-perso {
+	display: inline-block;
+	width: 140px;
+	text-align: right;
+}
+
+a {
+	border-radius: 8px;
+	font-weight: bold;
+}
+
+.push-right {
+	margin-right: 2px;
+}
+
+body {
+	background-color: #ffffff;
+	font-family: "Playball";
+}
+
+nav {
+	background-color: gainsboro;
+}
+
+.btn-social-icon {
+	background-color: #636e72;
+	color: white;
+}
+
+/*html{
+	position: relative;
+	height: 100%;
+	overflow: scroll;
+}
+
+footer{
+	margin-top: 20px;
+	position : absolute;
+	bottom : 0px;
+}*/
+
+/*.footer {
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	background-color: gainsboro;
+}*/
+
+.wrap {
+	background-image: linear-gradient(to right, #7efff5, #7d5fff);
+	border-radius: 8px;
+	border: 1px solid;
+}
+

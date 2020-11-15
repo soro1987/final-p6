@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<th:block th:insert="fragments/head::head"></th:block>
+<meta charset="UTF-8" />
+<style>
+#bg {
+	background-image: url('../images/edit-message.jpg');
+	background-size: cover;
+}
+
+.border-button {
+	border-width: 4px;
+	border-color: white;
+}
+</style>
+</head>
+<body id="bg">
+	<th:block th:insert="fragments/navbar::navbar"></th:block>
+
+	<div class="container mt-5">
+		<div class="row">
+			<!-- th:object pertmet de recuperer l'object par @ModelAttribute -->
+			<form th:if="${site != null}" class="container"
+				th:action="@{/editComment(id=${comment.id}, idSite=${site.id})}"
+				th:object="${commentModel}" method="POST">
+				<div class="form-group row">
+					<label class="col-12  text-light h5 border-text"> Votre
+						commentaire </label>
+					<!-- th:field permet de mettre à jour un champs de l'objet -->
+					<textarea class="form-control col-12 col-sm-9"
+						th:field="${comment.message}" name="message">
+						 <span th:text="${comment.message}"></span>
+						 </textarea>
+					<div class="col-12  text-light h5 border-text"
+						th:if="${#fields.hasErrors('message')}" th:errors="*{message}"></div>
+				</div>
+				<input type="submit" value="Valider"
+					class="offset-10 col-2 btn btn-secondary btn-lg border-button">
+				</fieldset>
+			</form>
+
+
+			<!-- th:object pertmet de recuperer l'object par @ModelAttribute -->
+			<form th:if="${topo != null}" class="container"
+				th:action="@{/editCommentTopo(id=${comment.id}, idTopo=${topo.id})}"
+				th:object="${commentModel}" method="POST">
+				<div class="form-group row">
+					<label class="col-12  text-light h5 border-text"> Votre
+						commentaire </label>
+					<!-- th:field permet de mettre à jour un champs de l'objet -->
+					<textarea class="form-control col-12 col-sm-9"
+						th:field="${comment.message}" name="message">
+						 <span th:text="${comment.message}"></span>
+						 </textarea>
+					<div class="col-12 col-sm-3 text-primary text-danger"
+						th:if="${#fields.hasErrors('message')}" th:errors="*{message}"></div>
+				</div>
+				<input type="submit" value="Valider"
+					class="offset-10 col-2 btn btn-secondary btn-lg border-button">
+				</fieldset>
+			</form>
+		</div>
+	</div>
+	<th:block th:insert="fragments/footer::footer"></th:block>
+</body>
+</html>

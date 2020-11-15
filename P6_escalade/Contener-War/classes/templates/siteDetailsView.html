@@ -1,0 +1,165 @@
+<!DOCTYPE html >
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+<th:block th:insert="fragments/head::head"></th:block>
+<meta charset="UTF-8" />
+
+</head>
+<th:block th:insert="fragments/navbar::navbar"></th:block>
+
+<style>
+.st {
+	font-style: italic;
+	font-weight: bold;
+}
+
+.bl {
+	font-weight: bold;
+	color: #0A654B;
+}
+
+.tw {
+	color: white;
+}
+
+html {
+	background-size: 100%;
+	background-repeat: no-repeat;
+	height: 100%;
+}
+
+body {
+	background-color: #9AECDB;
+}
+
+.border-button {
+	border-width: 4px;
+	border-color: white;
+}
+</style>
+
+
+<body id="bg">
+	<div class="container mt-5 text-center">
+		<div class="row">
+			<div class="card col-12">
+				<div class="card-body">
+					<h5 class="card-title">
+						<span class="text-light  h6 border-text1"
+							th:text="${site.nomSite}"></span>
+					</h5>
+					<p class="card-text">
+						<span class="text-light border-text2">Description : </span><span
+							class="text-secondary text-rep2"
+							th:text="${site.descriptionSite}"></span>
+					</p>
+					<div>
+						<span class="text-light border-text2">Secteurs : </span><span
+							class="text-secondary text-rep2"
+							th:text="${site.secteurs.size()}"></span><br /> <br />
+					</div>
+					<th:block th:each="secteur: ${site.secteurs}">
+						<span><a class="btn btn-info text-light border-button"
+							th:href="@{/displaySecteur/{id}(id=${secteur.id})}"
+							th:text="${secteur.nom}"></a></span>
+					</th:block>
+					<br>
+					<!-- Lorsque l'utilisateur est connécté j'afficher ce buttonn -->
+					<!-- Ce lien permet  d'afficher le formulaire postCommentView avec la methode GET ET l'id du site -->
+					<a th:if='${session.userSession != null}'
+						th:href="@{/postCommentaire/{id}(id=${site.id})}"
+						class="btn btn-info border-button">Commenter</a>
+
+					<!-- Button to Open the Modal -->
+					<a th:if='${session.userSession == null}' type="button"
+						class="btn btn-info" data-toggle="modal" data-target="#soro"
+						href="#"> Commenter </a>
+					<th:block th:if="${session.userSession != null}">
+						<a th:if="${session.userSession.id == site.userSiteRelation.id}"
+							th:href="@{/postSecteur/{id}(id=${site.id})}"
+							class="btn btn-secondary border-button">Ajouter secteur</a>
+					</th:block>
+					<br> <small class="text-muted"><span
+						class="text-light border-text2">Lieu : </span><span
+						class="text-secondary text-rep2" th:text="${site.lieu}"></span></small>
+				</div>
+				<img th:if="${site.imageUrl != null}"
+					th:src="@{/image/{image}(image=${site.imageUrl})}"
+					class="card-img-bottom">
+
+
+			</div>
+			<div class="card-body"></div>
+
+			<div class="col-12">
+				<!-- Quand on clique sur un site on recupere sont id t on l envoie a travers l url post secteur, on aurras acces a cette id ds le controlleur site controlleurgrace a l annotation @PathVariable -->
+				<ul class="list-group mt-5">
+					<li style="word-break: break-all;" class="list-group-item mt-2"
+						th:if="${comment.message != null}"
+						th:each="comment: ${site.commentaires}">
+						<div class="container-fluid">
+							<div class="row" th:if="${comment.userId != null}">
+								<div class="col-12 col-md-2">
+									<span class="bl text-secondary"
+										th:text="${comment.userId.username}"></span><br> <span
+										class="st"
+										th:text="${#dates.format(comment.date,'dd/MM/yyyy' )}"></span><br>
+									<span class="st"
+										th:text="${#dates.format(comment.date,'HH:mm' )}"></span>
+								</div>
+								<span class="col-12 col-md-8 mr-0 text-secondary"
+									th:text="${comment.message}"> </span>
+								<th:block
+									th:if="${(session.userSession != null &&  comment.userId.id == session.userSession.id)}">
+									<div class="col-6 col-md-2 text-right">
+										<a class="btn btn-success btn-sm"
+											th:href="@{/editComment(id=${comment.id}, idSite=${site.id})}"><i
+											class="fa fa-edit tw"></i></a> <a class="btn btn-danger btn-sm"
+											th:href="@{/deleteComment/{id}(id=${comment.id})}"><i
+											class="fa fa-trash tw"></i></a>
+									</div>
+								</th:block>
+								<th:block
+									th:if="${(session.userSession != null &&   session.userSession.admin &&  comment.userId.id != session.userSession.id)}">
+									<div class="col-6 col-md-2 text-right">
+										<a class="btn btn-success btn-sm"
+											th:href="@{/editComment(id=${comment.id}, idSite=${site.id})}"><i
+											class="fa fa-edit tw"></i></a> <a class="btn btn-danger btn-sm"
+											th:href="@{/deleteComment/{id}(id=${comment.id})}"><i
+											class="fa fa-trash tw"></i></a>
+									</div>
+								</th:block>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- The Modal -->
+	<div class="modal" id="soro">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">Modal Heading</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<!-- Modal body -->
+				<div class="modal-body">
+					<div class="alert alert-danger" role="alert">
+						<a th:href="@{/register}">Veuillez vous connectez afin de
+							commentez</a>
+					</div>
+				</div>
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<th:block th:insert="fragments/footer::footer"></th:block>
+</body>
+
+</html>
