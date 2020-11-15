@@ -21,6 +21,13 @@
 	</properties>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/org.webjars/jquery -->
 		<dependency>
 			<groupId>org.webjars</groupId>
@@ -38,7 +45,7 @@
 			<artifactId>font-awesome</artifactId>
 			<version>4.7.0</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -47,14 +54,13 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
-			<version>2.2.4.RELEASE</version>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework.boot</groupId> -->
-<!-- 			<artifactId>spring-boot-devtools</artifactId> -->
-<!-- 			<scope>runtime</scope> -->
-<!-- 			<optional>true</optional> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.boot</groupId> -->
+		<!-- <artifactId>spring-boot-devtools</artifactId> -->
+		<!-- <scope>runtime</scope> -->
+		<!-- <optional>true</optional> -->
+		<!-- </dependency> -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -75,7 +81,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.webjars/jquery -->
 		<dependency>
 			<groupId>org.webjars</groupId>
@@ -101,38 +107,58 @@
 	</dependencies>
 
 	<build>
+		<!-- <plugin> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-maven-plugin</artifactId> 
+			</plugin> -->
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>default-war</id>
+						<phase>prepare-package</phase>
+						<configuration>
+							<failOnMissingWebXml>false</failOnMissingWebXml>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
-		
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <!-- Création du Manifest pour la définition de la classe Main -->
-                        <manifest>
-                            <mainClass>com.soro.P6Application</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <!-- Création du Manifest pour la définition de la classe Main -->
-                        <manifest>
-                            <mainClass>com.soro.P6Application</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
 		</plugins>
-		
+
+
+
+		<!-- <plugins> -->
+		<!-- <plugin> -->
+		<!-- <groupId>org.springframework.boot</groupId> -->
+		<!-- <artifactId>spring-boot-maven-plugin</artifactId> -->
+		<!-- </plugin> -->
+
+		<!-- <plugin> -->
+		<!-- <groupId>org.apache.maven.plugins</groupId> -->
+		<!-- <artifactId>maven-jar-plugin</artifactId> -->
+		<!-- <configuration> -->
+		<!-- <archive> -->
+		<!-- Création du Manifest pour la définition de la classe Main -->
+		<!-- <manifest> -->
+		<!-- <mainClass>com.soro.P6Application</mainClass> -->
+		<!-- </manifest> -->
+		<!-- </archive> -->
+		<!-- </configuration> -->
+		<!-- </plugin> -->
+		<!-- <plugin> -->
+		<!-- <groupId>org.apache.maven.plugins</groupId> -->
+		<!-- <artifactId>maven-jar-plugin</artifactId> -->
+		<!-- <configuration> -->
+		<!-- <archive> -->
+		<!-- Création du Manifest pour la définition de la classe Main -->
+		<!-- <manifest> -->
+		<!-- <mainClass>com.soro.P6Application</mainClass> -->
+		<!-- </manifest> -->
+		<!-- </archive> -->
+		<!-- </configuration> -->
+		<!-- </plugin> -->
+		<!-- </plugins> -->
+
 	</build>
 
 </project>
